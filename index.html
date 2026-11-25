@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>全真粉專成效分析</title>
+<meta property="og:title" content="全真粉專成效分析（11/12–11/23）">
+<meta property="og:description" content="14 則貼文的觸及、互動、Reels 觀看長度與下一步建議">
+<meta property="og:image" content="https://flyshinny.github.io/quanzhen-fb-insights-2026/cover.jpg">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+:root{--color-fg:#2a2420;--color-fg-muted:#6f645c;--color-bg:#fbf8f4;--color-panel:#fff;--color-border-line:#e7ded4;--color-ok:#2f8a63;--color-warn:#c98a12;--color-bad:#b8432f;
+--font-anthropic-sans:"Noto Sans TC",system-ui,sans-serif;--font-anthropic-serif:"Noto Serif TC",Georgia,serif;
+--cds-font-size-caption:13px;--cds-font-size-body:16px;--cds-font-size-heading:19px;--cds-font-size-title:30px;--cds-font-weight-medium:600;
+--cds-gap-xs:4px;--cds-gap-sm:8px;--cds-gap-md:14px;--cds-gap-lg:20px;--cds-gap-xl:32px;--cds-pad-sm:6px;--cds-pad-md:10px;--cds-pad-lg:16px;--cds-radius:10px;
+--cds-chart-muted:#e4dbd1;--cds-chart-status-critical:#b8432f;--cds-text-secondary:#6f645c;--cds-surface-popover:#fff;--cds-border:#e7ded4;--cds-shadow-popover:0 6px 20px rgba(60,40,20,.14);
+--c1:#7a2a18;--c2:#d9921c;--c3:#2b8a7e;--c4:#a9a097}
+@media (prefers-color-scheme:dark){:root{--color-fg:#efe7df;--color-fg-muted:#b3a79c;--color-bg:#1d1916;--color-panel:#272220;--color-border-line:#3b3430;--cds-chart-muted:#3f3833;--cds-text-secondary:#b3a79c;--cds-surface-popover:#2c2724;--cds-border:#463e39;--c1:#e07a5c;--c2:#e9ad45;--c3:#4fb5a6;--c4:#857b73;color-scheme:dark}}
+body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(--font-anthropic-sans);font-size:15px;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+</style></head><body><div class="wrap">
+<script>
+(function(){
+const CSV="貼文,分類,類型,台灣時間,影片秒數,觸及人數,觀看次數,互動,心情,留言,分享,儲存,新追蹤,平均觀看秒,成效倍數,互動率,連結\n相片（無文案）11/11-2,無文案,相片,2026-11-12 10:51,,159,396,18,16,2,0,0,0,,,0.1132,https://www.facebook.com/photo.php?fbid=122119910079406002&set=a.122097398595406002&type=3\n相片（無文案）11/11-1,無文案,相片,2026-11-12 10:52,,2,2,19,18,0,1,0,0,,,,https://www.facebook.com/photo.php?fbid=122119910295406002&set=a.122097398589406002&type=3\n正向教養,生活圖文,相片,2026-11-13 14:29,,360,862,27,29,0,2,0,3,,,0.075,https://www.facebook.com/permalink.php?story_fbid=pfbid08Dc54nyVGRP62rioSd2i9Zy8VHbzdwK3Ye8u9d9xM1A6Ajy1LajJLeNZamcT7xvGl&id=61592180074011\n青年大會師彩排花絮,活動花絮,相片,2026-11-13 21:13,,6699,12980,371,373,39,24,0,8,,,0.0554,https://www.facebook.com/permalink.php?story_fbid=pfbid0mNRvcsHkmSsN5DhTKMqjX7ekzXzH3sp7CxBjDaYKdrEnCYhHKdWcnuvGmGrqr6LHl&id=61592180074011\n天氣提醒（帶傘添衣）,生活圖文,相片,2026-11-14 08:51,,298,614,23,22,0,1,0,0,,,0.0772,https://www.facebook.com/permalink.php?story_fbid=pfbid02CsMT8AGeuixKEYY1y56CKnyyqEBZssqeS7q3tH7v9sA9JmkZHV4tUt9RLazuHzP2l&id=61592180074011\n樂齡心理健康,生活圖文,相片,2026-11-14 20:30,,197,420,19,19,0,0,0,0,,,0.0964,https://www.facebook.com/permalink.php?story_fbid=pfbid02Jer56kpJrodsm9yHf79r2xxfhsYsWaCoUfVeEtR6TeeScsfN9iha6iAYf1WKWN5Fl&id=61592180074011\n前人愿行手語團練花絮,活動花絮,相片,2026-11-15 20:27,,3464,6255,197,207,2,3,0,4,,,0.0569,https://www.facebook.com/permalink.php?story_fbid=pfbid02qPhfPJs6VWNs2fZkE31ordQ4fwWtbNwQwQNnT8594G5AGNh9ASAtcXkNNPNPkGfAl&id=61592180074011\nReels 42 秒（無文案）,無文案,Reels,2026-11-15 20:28,42,391,584,31,29,0,2,0,2,6.865,-0.2x,0.0793,https://www.facebook.com/reel/1113067351501401/\n品德教育「放下」親子共讀,生活圖文,相片,2026-11-16 20:00,,555,1342,69,80,7,4,0,6,,,0.1243,https://www.facebook.com/permalink.php?story_fbid=pfbid024vACyXfWF7uVyy3pvuBR4eptoCxXeXZQXUqynSVtx8kZG3hBnyM5XXpLhbiG5Ebzl&id=61592180074011\n相片（無文案）11/16,無文案,相片,2026-11-17 08:45,,177,476,33,32,1,0,0,0,,,0.1864,https://www.facebook.com/photo.php?fbid=122120827797406002&set=a.122097398595406002&type=3\n中部法會預告「蘋安回家」,法會影片,Reels,2026-11-17 19:30,176,438,674,36,33,0,3,2,1,21.383,+1.1x,0.0822,https://www.facebook.com/reel/1830699731309226/\nReels 60 秒（無文案）,無文案,Reels,2026-11-18 08:00,60,315,459,26,26,0,0,0,0,9.265,-1.3x,0.0825,https://www.facebook.com/reel/1668896618349975/\nReels 27 秒（無文案）,無文案,Reels,2026-11-19 07:00,27,3380,4319,165,180,8,4,3,7,8.986,+1.1x,0.0488,https://www.facebook.com/reel/1479404217465064/\n柬埔寨天金道院壇辦法會,法會影片,Reels,2026-11-23 12:00,300,246,352,9,8,1,0,0,1,9.724,-3.6x,0.0366,https://www.facebook.com/reel/1127178556620004/\n";
+const reg={posts:{status:'ok',data:d3.csvParse(CSV)}};const calcs={};const draws=[];
+window.dash={colors:['var(--c1)','var(--c2)','var(--c3)','var(--c4)'],
+ calc(id,o){calcs[id]=o},
+ data(id){if(reg[id])return reg[id];const c=calcs[id];if(!c)return{status:'missing',data:[]};
+   reg[id]={status:'ok',data:c.fn(...c.inputs.map(i=>dash.data(i).data))};return reg[id];},
+ draw(name,fn){draws.push([name,fn])},onData(fn){fn()}};
+function run(){for(const [n,fn] of draws)document.querySelectorAll('[data-draw="'+n+'"]').forEach(el=>fn(el));}
+window.addEventListener('DOMContentLoaded',run);let w=innerWidth;addEventListener('resize',()=>{if(innerWidth!==w){w=innerWidth;run()}});
+})();
+</script>
+<style>
+.qz { display: grid; gap: var(--cds-gap-xl); }
+.qz-head h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0 0 var(--cds-gap-sm); text-wrap: balance; }
+.qz-lede { font-size: var(--cds-font-size-body); color: var(--color-fg); max-width: 62ch; line-height: 1.7; margin: 0; }
+.qz-sub { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); margin: var(--cds-gap-xs) 0 0; }
+.qz-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--cds-gap-md); }
+.qz-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); }
+.qz-tile .lab { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); letter-spacing: .04em; }
+.qz-tile .num { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; }
+.qz-tile .note { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.qz-sec { display: grid; gap: var(--cds-gap-sm); min-width: 0; }
+.qz-sec h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+.qz-sec .why { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); margin: 0; max-width: 70ch; line-height: 1.6; }
+.qz-chart { position: relative; min-height: 220px; }
+.qz-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.qz-chart text { fill: var(--cds-text-secondary); font-size: var(--cds-font-size-caption); font-family: var(--font-anthropic-sans); }
+.qz-chart text.val { fill: var(--color-fg); font-variant-numeric: tabular-nums; }
+.qz-chart text.name { fill: var(--color-fg); }
+.qz-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); font-size: var(--cds-font-size-caption); line-height: 1.6; color: var(--color-fg); white-space: nowrap; z-index: 2; }
+.qz-tip b { font-weight: var(--cds-font-weight-medium); }
+.qz-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.qz-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.qz-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.qz-two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--cds-gap-xl); }
+.qz-tw { overflow-x: auto; }
+.qz-tw table { border-collapse: collapse; width: 100%; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.qz-tw th, .qz-tw td { padding: 6px 10px; border-bottom: 1px solid var(--color-border-line); text-align: right; white-space: nowrap; }
+.qz-tw th:first-child, .qz-tw td:first-child, .qz-tw th:nth-child(2), .qz-tw td:nth-child(2) { text-align: left; }
+.qz-tw th { color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
+.qz-pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: var(--cds-font-size-caption); border: 1px solid var(--color-border-line); }
+.qz-recs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--cds-gap-md); }
+.qz-rec { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); align-content: start; }
+.qz-rec h3 { margin: 0; font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); }
+.qz-rec p { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); line-height: 1.7; }
+.qz-foot { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); line-height: 1.7; }
+.qz-foot summary { cursor: pointer; }
+.qz-err { color: var(--color-bad); font-size: var(--cds-font-size-caption); }
+</style>
+
+<div class="qz">
+  <header class="qz-head" id="head">
+    <h1>全真粉專成效分析</h1>
+    <p class="qz-lede" data-read lang="zh-Hant">11/12 至 11/23 共 <b data-draw="t-posts2" data-source="totals" data-field="posts" data-row="0">—</b> 則貼文，前 3 名就占了全部觸及人數的 <b data-draw="t-top3" data-source="totals" data-field="top3share" data-row="0">—</b>。成效最好的都是「有學長本人入鏡」的活動花絮，而 Reels 觀眾平均只看 7 到 10 秒就滑走。</p>
+    <p class="qz-sub">一貫道基礎忠恕瑞周全真單位粉專・時間皆為台灣時間・觸及人數＝Facebook「瀏覽人數」</p>
+  </header>
+
+  <section class="qz-tiles" id="kpis">
+    <div class="qz-tile"><span class="lab">貼文數</span><span class="num dash-skeleton" data-draw="t-posts" data-source="totals" data-field="posts" data-row="0"></span><span class="note">相片 8・Reels 6</span></div>
+    <div class="qz-tile"><span class="lab">觸及人數（各篇加總）</span><span class="num dash-skeleton" data-draw="t-reach" data-source="totals" data-field="reach" data-row="0"></span><span class="note">同一人看多篇會重複計算</span></div>
+    <div class="qz-tile"><span class="lab">互動次數</span><span class="num dash-skeleton" data-draw="t-inter" data-source="totals" data-field="inter" data-row="0"></span><span class="note">心情＋留言＋分享等</span></div>
+    <div class="qz-tile"><span class="lab">分享次數</span><span class="num dash-skeleton" data-draw="t-share" data-source="totals" data-field="shares" data-row="0"></span><span class="note">青年彩排花絮一則就有 24 次</span></div>
+    <div class="qz-tile"><span class="lab">淨增追蹤</span><span class="num dash-skeleton" data-draw="t-fol" data-source="totals" data-field="follows" data-row="0"></span><span class="note">新增減去取消追蹤</span></div>
+  </section>
+
+  <section class="qz-sec" id="reach-by-post">
+    <h2>每則貼文觸及多少人</h2>
+    <p class="why">依觸及人數排序，顏色代表內容分類。前 3 名的觸及人數遠高於其他貼文，其餘大多落在 150 到 550 人。</p>
+    <div class="qz-legend" data-draw="legend"></div>
+    <div class="qz-chart" data-draw="reachbar" data-source="posts" aria-label="每則貼文觸及人數長條圖"></div>
+  </section>
+
+  <div class="qz-two">
+    <section class="qz-sec" id="by-category">
+      <h2>哪一類內容平均觸及最多</h2>
+      <p class="why">每類貼文的平均觸及人數。括號裡是篇數，右邊是互動率（互動次數 ÷ 觸及人數）。</p>
+      <div class="qz-chart" data-draw="catbar" data-source="bycat" aria-label="各分類平均觸及人數"></div>
+    </section>
+    <section class="qz-sec" id="reels-watch">
+      <h2>Reels 觀眾平均看了幾秒</h2>
+      <p class="why">灰色是影片全長，彩色是平均觀看秒數。不管影片多長，觀眾都只停留 7 到 21 秒左右，所以影片越短，看完的比例越高。</p>
+      <div class="qz-chart" data-draw="reelbar" data-source="reels" aria-label="Reels 影片長度與平均觀看秒數"></div>
+    </section>
+  </div>
+
+  <section class="qz-sec" id="next">
+    <h2>接下來怎麼做</h2>
+    <div class="qz-recs">
+      <div class="qz-rec"><h3>11/28 忠恕總彩排：照花絮模式發</h3><p>多拍學長的臉，文案寫「找找看你在哪裡」「快來標註」，讓參與者幫忙分享出去。</p></div>
+      <div class="qz-rec"><h3>Reels 控制在 30 秒內</h3><p>觀眾大約 10 秒就離開，所以前 3 秒要先放最好的畫面。完整版可以另外用一般影片發。</p></div>
+      <div class="qz-rec"><h3>圖文結尾放一個問題</h3><p>親子共讀那則結尾放了「睡前聊聊」的 3 個問題，帶出 7 則留言、6 位新追蹤，是圖文類最好的一則。</p></div>
+      <div class="qz-rec"><h3>晚上 8 到 9 點發，不要斷更</h3><p>表現好的貼文多在台灣晚上 20:00 到 21:00 發出。11/20 到 11/22 都沒有發文，熱度斷掉了。</p></div>
+    </div>
+  </section>
+
+  <section class="qz-sec" id="all-posts">
+    <h2>全部貼文明細</h2>
+    <div class="qz-tw">
+      <table data-source="posts" data-row-key="貼文">
+        <thead><tr>
+          <th data-field="台灣時間">發佈（台灣）</th><th data-field="貼文">貼文</th><th data-field="分類">分類</th>
+          <th data-field="觸及人數">觸及</th><th data-field="互動">互動</th><th data-field="互動率">互動率</th>
+          <th data-field="留言">留言</th><th data-field="分享">分享</th><th data-field="新追蹤">新追蹤</th><th data-field="平均觀看秒">平均觀看秒</th>
+        </tr></thead>
+        <tbody data-draw="tbl"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <details class="qz-foot" id="notes">
+    <summary>資料說明</summary>
+    <p>資料來源是 Facebook 粉專匯出的「內容」報表（10/26 至 11/24），但這段期間第一則貼文是 11/12（台灣時間），所以實際只涵蓋約兩週。匯出時間是美西時間，頁面上已加 16 小時換成台灣時間（例如「週六午後容易下雨」那則，換算後正好是週六早上發出）。</p>
+    <p>匯出檔的欄位名稱錯位了一格：標成「散播範圍」的其實是成效倍數，觸及人數這裡採用「瀏覽人數」。11/11-1 那張照片的觸及只有 2 人卻有 19 次互動，應該是相簿裡的單張被另外計算，所以不算它的互動率。</p>
+  </details>
+</div>
+
+<script>
+const N = (v) => (v === '' || v == null ? null : +v);
+const CAT_COLOR = { '活動花絮': 0, '法會影片': 1, '生活圖文': 2, '無文案': 3 };
+window.qzCatColor = (c) => dash.colors[CAT_COLOR[c] ?? 3];
+
+dash.calc('totals', {
+  title: '整體合計', description: '所有貼文的篇數、觸及、互動、分享、新追蹤，以及前 3 名占總觸及的比例。',
+  inputs: ['posts'],
+  fn: (posts) => {
+    const s = (k) => d3.sum(posts, (r) => +r[k] || 0);
+    const reach = s('觸及人數');
+    const top3 = d3.sum(posts.map((r) => +r['觸及人數']).sort((a, b) => b - a).slice(0, 3));
+    return [{ posts: posts.length, reach, inter: s('互動'), shares: s('分享'), follows: s('新追蹤'), top3share: reach ? top3 / reach : null }];
+  },
+});
+
+dash.calc('bycat', {
+  title: '各分類平均', description: '依內容分類的篇數、平均觸及人數與互動率（互動加總 ÷ 觸及加總）。',
+  inputs: ['posts'],
+  fn: (posts) => d3.rollups(posts, (g) => ({
+    篇數: g.length,
+    平均觸及: Math.round(d3.mean(g, (r) => +r['觸及人數'])),
+    互動率: d3.sum(g, (r) => +r['互動']) / d3.sum(g, (r) => +r['觸及人數']),
+  }), (r) => r['分類']).map(([k, v]) => ({ 分類: k, ...v })).sort((a, b) => b.平均觸及 - a.平均觸及),
+});
+
+dash.calc('reels', {
+  title: 'Reels 觀看長度', description: '每支 Reels 的影片秒數、平均觀看秒數，以及平均觀看占全長的比例。',
+  inputs: ['posts'],
+  fn: (posts) => posts.filter((r) => r['類型'] === 'Reels').map((r) => ({
+    貼文: r['貼文'], 影片秒數: +r['影片秒數'], 平均觀看秒: +r['平均觀看秒'], 看完比例: +r['平均觀看秒'] / +r['影片秒數'],
+  })).sort((a, b) => a.影片秒數 - b.影片秒數),
+});
+
+const fmtInt = d3.format(',');
+const fmtPct = d3.format('.0%');
+function tile(name, field, fmt) {
+  dash.draw(name, (el) => {
+    const t = dash.data('totals');
+    if (t.status !== 'ok' || !t.data.length) { el.textContent = '—'; if (t.status !== 'loading') el.classList.remove('dash-skeleton'); return; }
+    el.classList.remove('dash-skeleton');
+    el.textContent = fmt(t.data[0][field]);
+  });
+}
+tile('t-posts', 'posts', fmtInt); tile('t-posts2', 'posts', fmtInt);
+tile('t-reach', 'reach', fmtInt); tile('t-inter', 'inter', fmtInt);
+tile('t-share', 'shares', fmtInt); tile('t-fol', 'follows', (v) => '+' + fmtInt(v));
+tile('t-top3', 'top3share', fmtPct);
+
+dash.draw('legend', (el) => {
+  el.replaceChildren(...Object.keys(CAT_COLOR).map((c) => {
+    const s = document.createElement('span'); const i = document.createElement('i');
+    i.style.background = window.qzCatColor(c); s.append(i, c); return s;
+  }));
+});
+
+function failMsg(el, d) {
+  if (d.status === 'error') { el.replaceChildren(Object.assign(document.createElement('p'), { className: 'qz-err', textContent: '這張圖的資料沒有載入成功。' })); return true; }
+  if (d.status !== 'ok') { el.textContent = '—'; return true; }
+  return false;
+}
+function makeTip(el) {
+  const tip = document.createElement('div'); tip.className = 'qz-tip'; tip.hidden = true; el.append(tip);
+  return {
+    show(ev, lines) {
+      tip.replaceChildren(...lines.map(([k, v], i) => { const d = document.createElement('div'); if (i === 0) { const b = document.createElement('b'); b.textContent = k; d.append(b); } else d.textContent = k + '：' + v; return d; }));
+      tip.hidden = false;
+      const r = el.getBoundingClientRect(); let x = ev.clientX - r.left + 12, y = ev.clientY - r.top + 12;
+      if (x + tip.offsetWidth > el.clientWidth) x = Math.max(0, el.clientWidth - tip.offsetWidth);
+      tip.style.left = x + 'px'; tip.style.top = y + 'px';
+    },
+    hide() { tip.hidden = true; },
+  };
+}
+
+dash.draw('reachbar', (el) => {
+  const d = dash.data('posts'); if (failMsg(el, d)) return;
+  const rows = d.data.slice().sort((a, b) => b['觸及人數'] - a['觸及人數']);
+  el.replaceChildren();
+  const W = el.clientWidth || 600, rowH = 26, nameW = Math.min(200, W * 0.42), padR = 56, H = rows.length * rowH + 4;
+  const x = d3.scaleLinear().domain([0, d3.max(rows, (r) => +r['觸及人數'])]).range([0, W - nameW - padR]);
+  const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', '每則貼文觸及人數，由高到低');
+  const tip = makeTip(el);
+  const g = svg.selectAll('g').data(rows).join('g').attr('transform', (r, i) => `translate(0,${i * rowH})`);
+  g.append('text').attr('class', 'name').attr('x', nameW - 8).attr('y', rowH / 2).attr('dy', '.35em').attr('text-anchor', 'end')
+    .text((r) => { const n = r['貼文']; const max = Math.floor((nameW - 8) / 12); return n.length > max ? n.slice(0, max - 1) + '…' : n; });
+  g.append('rect').attr('x', nameW).attr('y', 4).attr('height', rowH - 8).attr('rx', 2)
+    .attr('width', (r) => Math.max(1, x(+r['觸及人數']))).style('fill', (r) => window.qzCatColor(r['分類']));
+  g.append('text').attr('class', 'val').attr('x', (r) => nameW + x(+r['觸及人數']) + 6).attr('y', rowH / 2).attr('dy', '.35em')
+    .text((r) => fmtInt(+r['觸及人數']));
+  g.append('rect').attr('x', 0).attr('y', 0).attr('width', W).attr('height', rowH).style('fill', 'transparent')
+    .on('mousemove', (ev, r) => tip.show(ev, [[r['貼文']], ['發佈', r['台灣時間']], ['觸及', fmtInt(+r['觸及人數'])], ['互動', r['互動']], ['分享', r['分享']], ['新追蹤', r['新追蹤']]]))
+    .on('mouseleave', () => tip.hide());
+});
+
+dash.draw('catbar', (el) => {
+  const d = dash.data('bycat'); if (failMsg(el, d)) return;
+  const rows = d.data; el.replaceChildren();
+  const W = el.clientWidth || 400, rowH = 40, nameW = 110, padR = 120, H = rows.length * rowH;
+  const x = d3.scaleLinear().domain([0, d3.max(rows, (r) => r.平均觸及)]).range([0, Math.max(40, W - nameW - padR)]);
+  const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', '各分類平均觸及人數與互動率');
+  const g = svg.selectAll('g').data(rows).join('g').attr('transform', (r, i) => `translate(0,${i * rowH})`);
+  g.append('text').attr('class', 'name').attr('x', 0).attr('y', rowH / 2).attr('dy', '.35em').text((r) => `${r.分類}（${r.篇數}）`);
+  g.append('rect').attr('x', nameW).attr('y', 8).attr('height', rowH - 16).attr('rx', 2).attr('width', (r) => x(r.平均觸及)).style('fill', (r) => window.qzCatColor(r.分類));
+  g.append('text').attr('class', 'val').attr('x', (r) => nameW + x(r.平均觸及) + 6).attr('y', rowH / 2).attr('dy', '.35em')
+    .text((r) => `${fmtInt(r.平均觸及)} 人・互動率 ${d3.format('.1%')(r.互動率)}`);
+});
+
+dash.draw('reelbar', (el) => {
+  const d = dash.data('reels'); if (failMsg(el, d)) return;
+  const rows = d.data; el.replaceChildren();
+  const W = el.clientWidth || 400, rowH = 44, nameW = 0, H = rows.length * rowH;
+  const x = d3.scaleLinear().domain([0, d3.max(rows, (r) => r.影片秒數)]).range([0, W - 4]);
+  const svg = d3.select(el).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', '各支 Reels 影片長度與平均觀看秒數');
+  const tip = makeTip(el);
+  const g = svg.selectAll('g').data(rows).join('g').attr('transform', (r, i) => `translate(0,${i * rowH})`);
+  g.append('text').attr('class', 'name').attr('x', nameW).attr('y', 12)
+    .text((r) => `${r.貼文.replace(/（無文案）/, '')}・看完 ${fmtPct(r.看完比例)}`);
+  g.append('rect').attr('x', nameW).attr('y', 20).attr('height', 14).attr('rx', 2).attr('width', (r) => x(r.影片秒數)).style('fill', 'var(--cds-chart-muted)');
+  g.append('rect').attr('x', nameW).attr('y', 20).attr('height', 14).attr('rx', 2).attr('width', (r) => Math.max(2, x(r.平均觀看秒)))
+    .style('fill', (r) => r.看完比例 >= 0.25 ? 'var(--color-ok)' : r.看完比例 < 0.05 ? 'var(--cds-chart-status-critical)' : dash.colors[0]);
+  g.append('rect').attr('x', 0).attr('y', 0).attr('width', W).attr('height', rowH).style('fill', 'transparent')
+    .on('mousemove', (ev, r) => tip.show(ev, [[r.貼文], ['影片長度', r.影片秒數 + ' 秒'], ['平均觀看', r.平均觀看秒.toFixed(1) + ' 秒'], ['看完比例', fmtPct(r.看完比例)]]))
+    .on('mouseleave', () => tip.hide());
+});
+
+dash.draw('tbl', (tb) => {
+  const d = dash.data('posts');
+  if (d.status !== 'ok') { tb.replaceChildren(); return; }
+  const rows = d.data.slice().sort((a, b) => b['觸及人數'] - a['觸及人數']);
+  tb.replaceChildren(...rows.map((r) => {
+    const tr = document.createElement('tr');
+    const cells = [r['台灣時間'].slice(5), r['貼文'], null, fmtInt(+r['觸及人數']), r['互動'], N(r['互動率']) == null ? '—' : d3.format('.1%')(+r['互動率']), r['留言'], r['分享'], r['新追蹤'], N(r['平均觀看秒']) == null ? '—' : (+r['平均觀看秒']).toFixed(1)];
+    cells.forEach((c, i) => {
+      const td = document.createElement('td');
+      if (i === 2) { const p = document.createElement('span'); p.className = 'qz-pill'; p.textContent = r['分類']; p.style.borderColor = window.qzCatColor(r['分類']); td.append(p); }
+      else td.textContent = c;
+      tr.append(td);
+    });
+    return tr;
+  }));
+});
+</script>
+<p class="qz-foot" style="margin-top:32px">資料來源：Facebook 粉專「內容」報表匯出（2026/10/26–11/24）・整理：全真影音小組</p>
+</div></body></html>
